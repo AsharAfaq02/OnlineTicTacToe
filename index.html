@@ -1,0 +1,205 @@
+<html>
+<head>
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	 <script src="https://cdn.anychart.com/releases/8.9.0/js/graphics.min.js" type="text/javascript"></script>
+</head>
+<style>
+	.buttonStyle{
+		font-size: 50px;
+		height:80px; width:80px;
+		padding: 0;
+		border: none;
+		background: none;
+		position:absolute;
+	}
+
+
+</style>
+<body>
+	<h1 style = " color: navy; position: fixed; font-size: 20px">Online TicTacToe, Created by <a href = "mailto:asharafaq16@gmail.com">Ashar Afaq</a> @2020</h1>
+	<br>
+<h1 class = "chosenPlayer">Choose Player</h1>
+<div class = "rrr"></div>
+
+<button onclick="choosePlayer('X')" class = "play">Player one (X)</button><button onclick="choosePlayer('O')" class = "play">Player Two (O)</button>
+    	
+<br>
+<br>
+<div id = "container">
+<script>
+
+	stage = acgraph.create('container');
+        stage.path()
+            .moveTo(100, 10)
+            .lineTo(100, 310)
+
+
+            .moveTo(200, 10)
+            .lineTo(200, 310)
+
+            .moveTo(1, 110)
+            .lineTo(300, 110)
+
+            .moveTo(1, 210)
+            .lineTo(300, 210)
+            .close();
+
+
+</script>
+
+
+		<button onclick = "TicTacToe('a', 0, 0)" id = "a" class = "buttonStyle"></button> 
+		<button onclick = "TicTacToe('b', 0, 1)" id = "b" class = "buttonStyle"></button> 
+		<button onclick = "TicTacToe('c', 0, 2)" id = "c" class = "buttonStyle"></button>
+		<pre></pre>
+		<button onclick = "TicTacToe('d', 1, 0)" id = "d" class = "buttonStyle"></button> 
+		<button onclick = "TicTacToe('e', 1, 1)" id = "e" class = "buttonStyle"></button> 
+		<button onclick = "TicTacToe('f', 1, 2)" id = "f" class = "buttonStyle"></button>
+		<pre></pre>
+		<button onclick = "TicTacToe('g', 2, 0)" id = "g" class = "buttonStyle"></button> 
+		<button onclick = "TicTacToe('h', 2, 1)" id = "h" class = "buttonStyle"></button> 
+		<button onclick = "TicTacToe('i', 2, 2)" id = "i" class = "buttonStyle"></button>
+
+	</div>
+		
+<script>
+
+
+	
+  document.getElementById('a').style.left = 10 +'px';
+  document.getElementById('a').style.top = 160 +'px';
+
+
+ 
+  document.getElementById('b').style.left = 110 +'px';
+  document.getElementById('b').style.top = 160 +'px';
+
+  
+  document.getElementById('c').style.left = 210 +'px';
+  document.getElementById('c').style.top = 160 +'px';
+
+  
+  document.getElementById('d').style.left = 10 +'px';
+  document.getElementById('d').style.top = 260 +'px';
+
+  
+  document.getElementById('e').style.left = 110 +'px';
+  document.getElementById('e').style.top = 260 +'px';
+
+  
+  document.getElementById('f').style.left = 210 +'px';
+  document.getElementById('f').style.top = 260 +'px';
+
+  
+  document.getElementById('g').style.left = 10 +'px';
+  document.getElementById('g').style.top = 360 +'px';
+
+  
+  document.getElementById('h').style.left = 110 +'px';
+  document.getElementById('h').style.top = 360 +'px';
+
+  
+  document.getElementById('i').style.left = 210 +'px';
+  document.getElementById('i').style.top = 360 +'px';
+
+
+    		var Player;
+    		var Pswitch;
+    		var PlayerInd;
+    		var counter = 0;
+    		var isWinner = false;
+    		var optClicked = false;
+
+    		function choosePlayer(val){
+    			optClicked = true;
+    			counter++;
+    			if(counter == 512 && isWinner == false){
+    				$(document).ready(function(){
+						 		setTimeout(function() { alert("Cat's Game"); }, 10);
+						 		setTimeout(function() { location.reload(); }, 20);
+						 	});
+
+    				
+    			}
+
+
+	if(val == "X"){
+		Player = "X";
+		PlayerInd = 1;
+		 $(".chosenPlayer").empty().append("Player X Turn").css( "color", "red" );
+		 	$(document).ready(function() {
+  				$(".buttonStyle").click(function() { 
+  					$(this).css("color", "red");
+					choosePlayer("O");
+					Pswitch = "X";
+  						});
+					});
+				}
+ 	if(val == "O"){
+ 		Player = "O";
+ 		PlayerInd = 2;
+ 			$(".chosenPlayer").empty().append("Player O turn").css( "color", "blue" );
+ 				$(document).ready(function() {
+  					$(".buttonStyle").click(function() { 
+  						$(this).css("color", "blue");
+						choosePlayer("X");
+							Pswitch = "O";
+  						});
+					});
+ 				
+ 		}
+	}
+
+
+
+			var TTT = 	[[0, 0, 0],
+		 				[0, 0, 0],
+		 				[0, 0, 0]];
+
+
+		 	
+			function TicTacToe(IDVal, indexY, indexX){
+					if(optClicked == true){
+							$(".play").hide();
+		
+				
+
+				if(Player == "X"){
+					document.getElementById(IDVal).disabled = true; 
+					document.getElementById(IDVal).innerHTML = "X"; 
+						TTT[indexY][indexX] = 1; 	
+							}	
+				if(Player == "O"){
+					document.getElementById(IDVal).disabled = true; 
+					document.getElementById(IDVal).innerHTML = "O";
+						TTT[indexY][indexX] = 2; 	
+							}
+						}	
+							ind = 0;
+							while(ind<3){
+
+						 if(TTT[ind][0] == PlayerInd && TTT[ind][1] == PlayerInd && TTT[ind][2] == PlayerInd||
+							TTT[0][ind] == PlayerInd && TTT[1][ind] == PlayerInd && TTT[2][ind] == PlayerInd||
+							TTT[0][0] == PlayerInd   && TTT[1][1] ==   PlayerInd && TTT[2][2] == PlayerInd||
+							TTT[0][2] == PlayerInd   && TTT[1][1] ==   PlayerInd && TTT[2][0] == PlayerInd){
+						 	isWinner = true;
+						 	$(document).ready(function(){
+						 		setTimeout(function() { alert(Pswitch +" player wins"); }, 10);
+						 			setTimeout(function() { location.reload(); }, 20);
+								
+							});
+								ind = 3;
+							} 
+								else {
+								ind ++;
+							
+								}
+
+							} 
+						}
+						
+
+			
+    	</script>
+    </body>
+</html>
